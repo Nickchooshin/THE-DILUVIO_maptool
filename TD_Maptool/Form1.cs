@@ -77,6 +77,8 @@ namespace TD_Maptool
         {
             Graphics graphics = e.Graphics;
 
+            graphics.TranslateTransform(panel1.AutoScrollPosition.X, panel1.AutoScrollPosition.Y);
+
             for (int i = 0; i < mapSizeY; i++)
             {
                 for (int j = 0; j < mapSizeX; j++)

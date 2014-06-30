@@ -38,7 +38,7 @@
             this.textBox_SizeY = new System.Windows.Forms.TextBox();
             this.Label_SizeX = new System.Windows.Forms.Label();
             this.Label_SizeY = new System.Windows.Forms.Label();
-            this.panel1 = new TD_Maptool.DoubleBufferPanel();
+            this.panel1 = new DoubleBufferPanel();
             this.pictureBox = new System.Windows.Forms.PictureBox();
             this.menuStrip1.SuspendLayout();
             this.panel1.SuspendLayout();
@@ -185,7 +185,7 @@
         private System.Windows.Forms.Label Label_SizeX;
         private System.Windows.Forms.Label Label_SizeY;
         private System.Windows.Forms.PictureBox pictureBox;
-        private DoubleBufferPanel panel1;
+        private System.Windows.Forms.Panel panel1;
     }
 }
 
