@@ -88,7 +88,11 @@ namespace TD_Maptool
 
         private void oepnToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            FileStream file = new FileStream("map.dat", FileMode.OpenOrCreate, FileAccess.Read);
+            if (openFileDialog1.ShowDialog() != DialogResult.OK)
+                return;
+            string FilePath = openFileDialog1.FileName;
+
+            FileStream file = new FileStream(FilePath, FileMode.OpenOrCreate, FileAccess.Read);
             StreamReader reader = new StreamReader(file);
 
             string[] str;
@@ -108,6 +112,8 @@ namespace TD_Maptool
                 }
             }
 
+            reader.Close();
+
             pictureBox.Location = new Point(mapSizeX * 32, mapSizeY * 32);
 
             panel1.Invalidate();
@@ -115,7 +121,11 @@ namespace TD_Maptool
 
         private void saveToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            FileStream file = new FileStream("map.dat", FileMode.Create, FileAccess.Write);
+            if (saveFileDialog1.ShowDialog() != DialogResult.OK)
+                return;
+            string FilePath = saveFileDialog1.FileName;
+
+            FileStream file = new FileStream(FilePath, FileMode.Create, FileAccess.Write);
             StreamWriter writer = new StreamWriter(file);
 
             writer.WriteLine(mapSizeX + " " + mapSizeY);

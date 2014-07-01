@@ -39,6 +39,8 @@
             this.Label_SizeX = new System.Windows.Forms.Label();
             this.Label_SizeY = new System.Windows.Forms.Label();
             this.listBox_Tile = new System.Windows.Forms.ListBox();
+            this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
+            this.saveFileDialog1 = new System.Windows.Forms.SaveFileDialog();
             this.panel1 = new TD_Maptool.DoubleBufferPanel();
             this.pictureBox = new System.Windows.Forms.PictureBox();
             this.menuStrip1.SuspendLayout();
@@ -143,6 +145,18 @@
             this.listBox_Tile.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.listBox_Tile_DrawItem);
             this.listBox_Tile.SelectedIndexChanged += new System.EventHandler(this.listBox_Tile_SelectedIndexChanged);
             // 
+            // openFileDialog1
+            // 
+            this.openFileDialog1.Filter = "dat 파일|*.dat|모든 파일|*.*";
+            this.openFileDialog1.InitialDirectory = "./";
+            this.openFileDialog1.Tag = "";
+            // 
+            // saveFileDialog1
+            // 
+            this.saveFileDialog1.Filter = "dat 파일|*.dat|모든 파일|*.*";
+            this.saveFileDialog1.InitialDirectory = "./";
+            this.saveFileDialog1.Tag = "";
+            // 
             // panel1
             // 
             this.panel1.AutoScroll = true;
@@ -204,6 +218,8 @@
         private System.Windows.Forms.PictureBox pictureBox;
         private System.Windows.Forms.ListBox listBox_Tile;
         private DoubleBufferPanel panel1;
+        private System.Windows.Forms.OpenFileDialog openFileDialog1;
+        private System.Windows.Forms.SaveFileDialog saveFileDialog1;
     }
 }
 
