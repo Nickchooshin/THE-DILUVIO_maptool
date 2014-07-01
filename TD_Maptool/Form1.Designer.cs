@@ -138,7 +138,7 @@
             this.listBox_Tile.ItemHeight = 32;
             this.listBox_Tile.Location = new System.Drawing.Point(12, 73);
             this.listBox_Tile.Name = "listBox_Tile";
-            this.listBox_Tile.Size = new System.Drawing.Size(160, 612);
+            this.listBox_Tile.Size = new System.Drawing.Size(160, 580);
             this.listBox_Tile.TabIndex = 1;
             this.listBox_Tile.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.listBox_Tile_DrawItem);
             this.listBox_Tile.SelectedIndexChanged += new System.EventHandler(this.listBox_Tile_SelectedIndexChanged);

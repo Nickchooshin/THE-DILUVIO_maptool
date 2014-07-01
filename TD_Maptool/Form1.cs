@@ -7,14 +7,16 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 using System.Xml;
+using System.IO;
 
 namespace TD_Maptool
 {
     public partial class Form1 : Form
     {
         private int mapSizeX = 0, mapSizeY = 0;
-        private Image[,] m_Image;
-        private int prevSelectedIndex = 0;
+        private int[,] m_Map;
+        private Image[] m_Image;
+        private int prevSelectedIndex = -1;
         private XmlNodeList m_NodeList;
         private bool m_bDrag=false;
 
@@ -26,15 +28,20 @@ namespace TD_Maptool
             xmlFile.Load("Resource/tile_data.xml");
             m_NodeList = xmlFile.SelectNodes("tile/data");
 
+            m_Image = new Image[m_NodeList.Count];
+
+            int i = 0;
             foreach (XmlNode Node in m_NodeList)
             {
                 listBox_Tile.Items.Add(Node["name"].InnerText.ToString());
+                m_Image[i++] = Image.FromFile(Node["image"].InnerText.ToString());
             }
         }
 
         private void newToolStripMenuItem_Click(object sender, EventArgs e)
         {
             Form2 form = new Form2();
+            form.SetMapSize(mapSizeX, mapSizeY);
             form.ShowDialog();
 
             //
@@ -44,7 +51,7 @@ namespace TD_Maptool
 
             form.GetMapSize(ref mapSizeX, ref mapSizeY);
 
-            Image[,] image = new Image[mapSizeY, mapSizeX];
+            int[,] map = new int[mapSizeY, mapSizeX];
 
             if (prevSizeX > mapSizeX)
                 prevSizeX = mapSizeX;
@@ -55,8 +62,7 @@ namespace TD_Maptool
             {
                 for (int j = 0; j < mapSizeX; j++)
                 {
-                    XmlNode Node = m_NodeList[0];
-                    image[i, j] = Image.FromFile(Node["image"].InnerText.ToString());
+                    map[i, j] = 0;
                 }
             }
 
@@ -64,11 +70,11 @@ namespace TD_Maptool
             {
                 for (int j = 0; j < prevSizeX; j++)
                 {
-                    image[i, j] = m_Image[i, j];
+                    map[i, j] = m_Map[i, j];
                 }
             }
 
-            m_Image = image;
+            m_Map = map;
 
             //
 
@@ -82,11 +88,49 @@ namespace TD_Maptool
 
         private void oepnToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            FileStream file = new FileStream("map.dat", FileMode.OpenOrCreate, FileAccess.Read);
+            StreamReader reader = new StreamReader(file);
 
+            string[] str;
+            str = reader.scanf();
+
+            mapSizeX = int.Parse(str[0].ToString());
+            mapSizeY = int.Parse(str[1].ToString());
+
+            m_Map = new int[mapSizeY, mapSizeX];
+
+            for (int i = 0; i < mapSizeY; i++)
+            {
+                str = reader.scanf();
+                for (int j = 0; j < mapSizeX; j++)
+                {
+                    m_Map[i, j] = int.Parse(str[j].ToString());
+                }
+            }
+
+            pictureBox.Location = new Point(mapSizeX * 32, mapSizeY * 32);
+
+            panel1.Invalidate();
         }
 
         private void saveToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            FileStream file = new FileStream("map.dat", FileMode.Create, FileAccess.Write);
+            StreamWriter writer = new StreamWriter(file);
+
+            writer.WriteLine(mapSizeX + " " + mapSizeY);
+
+            for (int i = 0; i < mapSizeY; i++)
+            {
+                for (int j = 0; j < mapSizeX; j++)
+                {
+                    writer.Write(m_Map[i, j] + " ");
+                }
+
+                writer.WriteLine();
+            }
+
+            writer.Close();
         }
 
         private void exitToolStripMenuItem_Click(object sender, EventArgs e)
@@ -104,7 +148,7 @@ namespace TD_Maptool
             {
                 for (int j = 0; j < mapSizeX; j++)
                 {
-                    graphics.DrawImage(m_Image[i, j], j * 32, i * 32);
+                    graphics.DrawImage(m_Image[m_Map[i, j]], j * 32, i * 32);
                 }
             }
         }
@@ -136,7 +180,8 @@ namespace TD_Maptool
 
         private void listBox_Tile_SelectedIndexChanged(object sender, EventArgs e)
         {
-            listBox_Tile.Invalidate(listBox_Tile.GetItemRectangle(prevSelectedIndex));
+            if (prevSelectedIndex != -1)
+                listBox_Tile.Invalidate(listBox_Tile.GetItemRectangle(prevSelectedIndex));
 
             prevSelectedIndex = listBox_Tile.SelectedIndex;
         }
@@ -153,7 +198,7 @@ namespace TD_Maptool
 
         private void panel1_MouseMove(object sender, MouseEventArgs e)
         {
-            if (!m_bDrag)
+            if (!m_bDrag || prevSelectedIndex == -1)
                 return;
 
             int X = (e.X - panel1.AutoScrollPosition.X) / 32;
@@ -161,8 +206,7 @@ namespace TD_Maptool
 
             if ((X >= 0 && Y >= 0) && (X < mapSizeX && Y < mapSizeY))
             {
-                XmlNode Node = m_NodeList[prevSelectedIndex];
-                m_Image[Y, X] = Image.FromFile(Node["image"].InnerText.ToString());
+                m_Map[Y, X] = prevSelectedIndex;
                 panel1.Invalidate();
             }
         }

@@ -18,6 +18,12 @@ namespace TD_Maptool
             InitializeComponent();
         }
 
+        public void SetMapSize(int x, int y)
+        {
+            textBox_SizeX.Text = x.ToString();
+            textBox_SizeY.Text = y.ToString();
+        }
+
         public void GetMapSize(ref int x, ref int y)
         {
             x = SizeX;
