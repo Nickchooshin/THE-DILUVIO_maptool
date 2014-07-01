@@ -13,6 +13,7 @@ namespace TD_Maptool
 {
     public partial class Form1 : Form
     {
+        private int tileSizeXY = 32;
         private int mapSizeX = 0, mapSizeY = 0;
         private int[,] m_Map;
         private Image[] m_Image;
@@ -23,6 +24,8 @@ namespace TD_Maptool
         public Form1()
         {
             InitializeComponent();
+
+            listBox_Tile.ItemHeight = tileSizeXY;
 
             XmlDocument xmlFile = new XmlDocument();
             xmlFile.Load("Resource/tile_data.xml");
@@ -44,7 +47,31 @@ namespace TD_Maptool
             form.SetMapSize(mapSizeX, mapSizeY);
             form.ShowDialog();
 
-            //
+            form.GetMapSize(ref mapSizeX, ref mapSizeY);
+
+            m_Map = new int[mapSizeY, mapSizeX];
+
+            for (int i = 0; i < mapSizeY; i++)
+            {
+                for (int j = 0; j < mapSizeX; j++)
+                {
+                    m_Map[i, j] = 0;
+                }
+            }
+
+            textBox_SizeX.Text = mapSizeX.ToString();
+            textBox_SizeY.Text = mapSizeY.ToString();
+
+            pictureBox.Location = new Point(mapSizeX * tileSizeXY, mapSizeY * tileSizeXY);
+
+            panel1.Invalidate();
+        }
+
+        private void resizeToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Form2 form = new Form2();
+            form.SetMapSize(mapSizeX, mapSizeY);
+            form.ShowDialog();
 
             int prevSizeX = mapSizeX;
             int prevSizeY = mapSizeY;
@@ -76,12 +103,10 @@ namespace TD_Maptool
 
             m_Map = map;
 
-            //
-
             textBox_SizeX.Text = mapSizeX.ToString();
             textBox_SizeY.Text = mapSizeY.ToString();
 
-            pictureBox.Location = new Point(mapSizeX * 32, mapSizeY * 32);
+            pictureBox.Location = new Point(mapSizeX * tileSizeXY, mapSizeY * tileSizeXY);
 
             panel1.Invalidate();
         }
@@ -114,7 +139,7 @@ namespace TD_Maptool
 
             reader.Close();
 
-            pictureBox.Location = new Point(mapSizeX * 32, mapSizeY * 32);
+            pictureBox.Location = new Point(mapSizeX * tileSizeXY, mapSizeY * tileSizeXY);
 
             panel1.Invalidate();
         }
@@ -158,7 +183,7 @@ namespace TD_Maptool
             {
                 for (int j = 0; j < mapSizeX; j++)
                 {
-                    graphics.DrawImage(m_Image[m_Map[i, j]], j * 32, i * 32);
+                    graphics.DrawImage(m_Image[m_Map[i, j]], j * tileSizeXY, i * tileSizeXY);
                 }
             }
         }
@@ -178,8 +203,8 @@ namespace TD_Maptool
             else
                 brush = Brushes.Black;
 
-            int x = e.Bounds.X + e.Font.Height + 32;
-            int y = e.Bounds.Y + e.Font.Height;
+            int x = e.Bounds.X + e.Font.Height + tileSizeXY;
+            int y = e.Bounds.Y + (listBox_Tile.ItemHeight / 2) - (e.Font.Height / 2);
 
             XmlNode Node = m_NodeList[e.Index];
             Image img = Image.FromFile(Node["image"].InnerText.ToString());
@@ -211,8 +236,8 @@ namespace TD_Maptool
             if (!m_bDrag || prevSelectedIndex == -1)
                 return;
 
-            int X = (e.X - panel1.AutoScrollPosition.X) / 32;
-            int Y = (e.Y - panel1.AutoScrollPosition.Y) / 32;
+            int X = (e.X - panel1.AutoScrollPosition.X) / tileSizeXY;
+            int Y = (e.Y - panel1.AutoScrollPosition.Y) / tileSizeXY;
 
             if ((X >= 0 && Y >= 0) && (X < mapSizeX && Y < mapSizeY))
             {
@@ -225,6 +250,18 @@ namespace TD_Maptool
         {
             Form3 form = new Form3();
             form.ShowDialog();
+        }
+
+        private void tileSizeToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Form4 form = new Form4();
+            form.SetTileSize(tileSizeXY);
+            form.ShowDialog();
+            tileSizeXY = form.GetTileSize();
+
+            panel1.Invalidate();
+            listBox_Tile.ItemHeight = tileSizeXY;
+            listBox_Tile.Invalidate();
         }
     }
 }
