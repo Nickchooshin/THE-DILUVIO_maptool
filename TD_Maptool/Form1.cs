@@ -14,8 +14,9 @@ namespace TD_Maptool
     {
         private int mapSizeX = 0, mapSizeY = 0;
         private Image[,] m_Image;
-        private int currenrSelectedIndex = -1, prevSelectedIndex = -1;
+        private int prevSelectedIndex = -1;
         private XmlNodeList m_NodeList;
+        private bool m_bDrag=false;
 
         public Form1()
         {
@@ -86,7 +87,6 @@ namespace TD_Maptool
 
         private void saveToolStripMenuItem_Click(object sender, EventArgs e)
         {
-
         }
 
         private void exitToolStripMenuItem_Click(object sender, EventArgs e)
@@ -142,6 +142,32 @@ namespace TD_Maptool
                 listBox_Tile.Invalidate(listBox_Tile.GetItemRectangle(prevSelectedIndex));
 
             prevSelectedIndex = listBox_Tile.SelectedIndex;
+        }
+
+        private void panel1_MouseDown(object sender, MouseEventArgs e)
+        {
+            m_bDrag = true;
+        }
+
+        private void panel1_MouseUp(object sender, MouseEventArgs e)
+        {
+            m_bDrag = false;
+        }
+
+        private void panel1_MouseMove(object sender, MouseEventArgs e)
+        {
+            if (!m_bDrag)
+                return;
+
+            int X = e.X / 32;
+            int Y = e.Y / 32;
+
+            if ((X >= 0 && Y >= 0) && (X < mapSizeX && Y < mapSizeY))
+            {
+                XmlNode Node = m_NodeList[prevSelectedIndex];
+                m_Image[Y, X] = Image.FromFile(Node["image"].InnerText.ToString());
+                panel1.Invalidate();
+            }
         }
     }
 }

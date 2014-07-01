@@ -135,10 +135,10 @@
             // 
             this.listBox_Tile.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
             this.listBox_Tile.FormattingEnabled = true;
-            this.listBox_Tile.ItemHeight = 30;
+            this.listBox_Tile.ItemHeight = 32;
             this.listBox_Tile.Location = new System.Drawing.Point(12, 73);
             this.listBox_Tile.Name = "listBox_Tile";
-            this.listBox_Tile.Size = new System.Drawing.Size(160, 634);
+            this.listBox_Tile.Size = new System.Drawing.Size(160, 612);
             this.listBox_Tile.TabIndex = 1;
             this.listBox_Tile.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.listBox_Tile_DrawItem);
             this.listBox_Tile.SelectedIndexChanged += new System.EventHandler(this.listBox_Tile_SelectedIndexChanged);
@@ -153,6 +153,9 @@
             this.panel1.TabIndex = 6;
             this.panel1.Scroll += new System.Windows.Forms.ScrollEventHandler(this.panel1_Scroll);
             this.panel1.Paint += new System.Windows.Forms.PaintEventHandler(this.panel1_Paint);
+            this.panel1.MouseDown += new System.Windows.Forms.MouseEventHandler(this.panel1_MouseDown);
+            this.panel1.MouseMove += new System.Windows.Forms.MouseEventHandler(this.panel1_MouseMove);
+            this.panel1.MouseUp += new System.Windows.Forms.MouseEventHandler(this.panel1_MouseUp);
             // 
             // pictureBox
             // 
