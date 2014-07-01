@@ -220,5 +220,11 @@ namespace TD_Maptool
                 panel1.Invalidate();
             }
         }
+
+        private void infoToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Form3 form = new Form3();
+            form.ShowDialog();
+        }
     }
 }
