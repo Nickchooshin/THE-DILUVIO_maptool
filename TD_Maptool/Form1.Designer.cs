@@ -38,7 +38,8 @@
             this.textBox_SizeY = new System.Windows.Forms.TextBox();
             this.Label_SizeX = new System.Windows.Forms.Label();
             this.Label_SizeY = new System.Windows.Forms.Label();
-            this.panel1 = new DoubleBufferPanel();
+            this.listBox_Tile = new System.Windows.Forms.ListBox();
+            this.panel1 = new TD_Maptool.DoubleBufferPanel();
             this.pictureBox = new System.Windows.Forms.PictureBox();
             this.menuStrip1.SuspendLayout();
             this.panel1.SuspendLayout();
@@ -51,7 +52,7 @@
             this.fIleToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(708, 24);
+            this.menuStrip1.Size = new System.Drawing.Size(830, 24);
             this.menuStrip1.TabIndex = 0;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -97,7 +98,7 @@
             // textBox_SizeX
             // 
             this.textBox_SizeX.Enabled = false;
-            this.textBox_SizeX.Location = new System.Drawing.Point(12, 46);
+            this.textBox_SizeX.Location = new System.Drawing.Point(178, 46);
             this.textBox_SizeX.Name = "textBox_SizeX";
             this.textBox_SizeX.Size = new System.Drawing.Size(68, 21);
             this.textBox_SizeX.TabIndex = 2;
@@ -106,7 +107,7 @@
             // textBox_SizeY
             // 
             this.textBox_SizeY.Enabled = false;
-            this.textBox_SizeY.Location = new System.Drawing.Point(86, 46);
+            this.textBox_SizeY.Location = new System.Drawing.Point(252, 46);
             this.textBox_SizeY.Name = "textBox_SizeY";
             this.textBox_SizeY.Size = new System.Drawing.Size(68, 21);
             this.textBox_SizeY.TabIndex = 3;
@@ -115,7 +116,7 @@
             // Label_SizeX
             // 
             this.Label_SizeX.AutoSize = true;
-            this.Label_SizeX.Location = new System.Drawing.Point(12, 31);
+            this.Label_SizeX.Location = new System.Drawing.Point(178, 31);
             this.Label_SizeX.Name = "Label_SizeX";
             this.Label_SizeX.Size = new System.Drawing.Size(13, 12);
             this.Label_SizeX.TabIndex = 4;
@@ -124,19 +125,31 @@
             // Label_SizeY
             // 
             this.Label_SizeY.AutoSize = true;
-            this.Label_SizeY.Location = new System.Drawing.Point(84, 31);
+            this.Label_SizeY.Location = new System.Drawing.Point(250, 31);
             this.Label_SizeY.Name = "Label_SizeY";
             this.Label_SizeY.Size = new System.Drawing.Size(13, 12);
             this.Label_SizeY.TabIndex = 5;
             this.Label_SizeY.Text = "Y";
             // 
+            // listBox_Tile
+            // 
+            this.listBox_Tile.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
+            this.listBox_Tile.FormattingEnabled = true;
+            this.listBox_Tile.ItemHeight = 30;
+            this.listBox_Tile.Location = new System.Drawing.Point(12, 73);
+            this.listBox_Tile.Name = "listBox_Tile";
+            this.listBox_Tile.Size = new System.Drawing.Size(160, 634);
+            this.listBox_Tile.TabIndex = 1;
+            this.listBox_Tile.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.listBox_Tile_DrawItem);
+            this.listBox_Tile.SelectedIndexChanged += new System.EventHandler(this.listBox_Tile_SelectedIndexChanged);
+            // 
             // panel1
             // 
             this.panel1.AutoScroll = true;
             this.panel1.Controls.Add(this.pictureBox);
-            this.panel1.Location = new System.Drawing.Point(12, 73);
+            this.panel1.Location = new System.Drawing.Point(178, 73);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(684, 525);
+            this.panel1.Size = new System.Drawing.Size(640, 640);
             this.panel1.TabIndex = 6;
             this.panel1.Scroll += new System.Windows.Forms.ScrollEventHandler(this.panel1_Scroll);
             this.panel1.Paint += new System.Windows.Forms.PaintEventHandler(this.panel1_Paint);
@@ -153,7 +166,8 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(708, 610);
+            this.ClientSize = new System.Drawing.Size(830, 726);
+            this.Controls.Add(this.listBox_Tile);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.Label_SizeY);
             this.Controls.Add(this.Label_SizeX);
@@ -185,7 +199,8 @@
         private System.Windows.Forms.Label Label_SizeX;
         private System.Windows.Forms.Label Label_SizeY;
         private System.Windows.Forms.PictureBox pictureBox;
-        private System.Windows.Forms.Panel panel1;
+        private System.Windows.Forms.ListBox listBox_Tile;
+        private DoubleBufferPanel panel1;
     }
 }
 
