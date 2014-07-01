@@ -14,7 +14,7 @@ namespace TD_Maptool
     {
         private int mapSizeX = 0, mapSizeY = 0;
         private Image[,] m_Image;
-        private int prevSelectedIndex = -1;
+        private int prevSelectedIndex = 0;
         private XmlNodeList m_NodeList;
         private bool m_bDrag=false;
 
@@ -136,10 +136,7 @@ namespace TD_Maptool
 
         private void listBox_Tile_SelectedIndexChanged(object sender, EventArgs e)
         {
-            listBox_Tile.Invalidate();
-
-            if (prevSelectedIndex != -1)
-                listBox_Tile.Invalidate(listBox_Tile.GetItemRectangle(prevSelectedIndex));
+            listBox_Tile.Invalidate(listBox_Tile.GetItemRectangle(prevSelectedIndex));
 
             prevSelectedIndex = listBox_Tile.SelectedIndex;
         }
@@ -159,8 +156,8 @@ namespace TD_Maptool
             if (!m_bDrag)
                 return;
 
-            int X = e.X / 32;
-            int Y = e.Y / 32;
+            int X = (e.X - panel1.AutoScrollPosition.X) / 32;
+            int Y = (e.Y - panel1.AutoScrollPosition.Y) / 32;
 
             if ((X >= 0 && Y >= 0) && (X < mapSizeX && Y < mapSizeY))
             {
