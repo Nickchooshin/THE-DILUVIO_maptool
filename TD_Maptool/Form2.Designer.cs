@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form2));
             this.Button_OK = new System.Windows.Forms.Button();
             this.textBox_SizeX = new System.Windows.Forms.TextBox();
             this.textBox_SizeY = new System.Windows.Forms.TextBox();
@@ -100,6 +101,7 @@
             this.Controls.Add(this.textBox_SizeY);
             this.Controls.Add(this.textBox_SizeX);
             this.Controls.Add(this.Button_OK);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "Form2";
             this.Text = "Map Size";
             this.ResumeLayout(false);

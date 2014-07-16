@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form4));
             this.label1 = new System.Windows.Forms.Label();
             this.textBox_TileSize = new System.Windows.Forms.TextBox();
             this.button_OK = new System.Windows.Forms.Button();
@@ -68,6 +69,7 @@
             this.Controls.Add(this.button_OK);
             this.Controls.Add(this.textBox_TileSize);
             this.Controls.Add(this.label1);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "Form4";
             this.Text = "Tile Size";
             this.ResumeLayout(false);
