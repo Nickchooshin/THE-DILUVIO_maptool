@@ -38,6 +38,7 @@
             this.exitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.settingToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.tileSizeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.frameToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.helpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.infoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.textBox_SizeX = new System.Windows.Forms.TextBox();
@@ -119,7 +120,8 @@
             // settingToolStripMenuItem
             // 
             this.settingToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.tileSizeToolStripMenuItem});
+            this.tileSizeToolStripMenuItem,
+            this.frameToolStripMenuItem});
             this.settingToolStripMenuItem.Name = "settingToolStripMenuItem";
             this.settingToolStripMenuItem.Size = new System.Drawing.Size(57, 20);
             this.settingToolStripMenuItem.Text = "Setting";
@@ -130,6 +132,13 @@
             this.tileSizeToolStripMenuItem.Size = new System.Drawing.Size(114, 22);
             this.tileSizeToolStripMenuItem.Text = "TileSize";
             this.tileSizeToolStripMenuItem.Click += new System.EventHandler(this.tileSizeToolStripMenuItem_Click);
+            // 
+            // frameToolStripMenuItem
+            // 
+            this.frameToolStripMenuItem.Name = "frameToolStripMenuItem";
+            this.frameToolStripMenuItem.Size = new System.Drawing.Size(114, 22);
+            this.frameToolStripMenuItem.Text = "Frame";
+            this.frameToolStripMenuItem.Click += new System.EventHandler(this.frameToolStripMenuItem_Click);
             // 
             // helpToolStripMenuItem
             // 
@@ -273,7 +282,7 @@
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MainMenuStrip = this.menuStrip1;
             this.Name = "Form1";
-            this.Text = "THE DILUVIO - map_tool  v 1.01";
+            this.Text = "THE DILUVIO - map_tool  v 1.02";
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
             this.panel1.ResumeLayout(false);
@@ -308,6 +317,7 @@
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.TextBox textBox_PosY;
         private System.Windows.Forms.TextBox textBox_PosX;
+        private System.Windows.Forms.ToolStripMenuItem frameToolStripMenuItem;
     }
 }
 

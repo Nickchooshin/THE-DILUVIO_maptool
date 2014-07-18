@@ -19,7 +19,8 @@ namespace TD_Maptool
         private Image[] m_Image;
         private int prevSelectedIndex = -1;
         private XmlNodeList m_NodeList;
-        private bool m_bDrag=false;
+        private bool m_bDrag = false;
+        private bool m_bFrame = false;
 
         public Form1()
         {
@@ -62,7 +63,7 @@ namespace TD_Maptool
             textBox_SizeX.Text = mapSizeX.ToString();
             textBox_SizeY.Text = mapSizeY.ToString();
 
-            pictureBox.Location = new Point(mapSizeX * tileSizeXY, mapSizeY * tileSizeXY);
+            ResizePictureBoxLocation();
 
             panel1.Invalidate();
         }
@@ -106,7 +107,7 @@ namespace TD_Maptool
             textBox_SizeX.Text = mapSizeX.ToString();
             textBox_SizeY.Text = mapSizeY.ToString();
 
-            pictureBox.Location = new Point(mapSizeX * tileSizeXY, mapSizeY * tileSizeXY);
+            ResizePictureBoxLocation();
 
             panel1.Invalidate();
         }
@@ -139,7 +140,11 @@ namespace TD_Maptool
 
             reader.Close();
 
-            pictureBox.Location = new Point(mapSizeX * tileSizeXY, mapSizeY * tileSizeXY);
+            int tileFrameSize = tileSizeXY;
+            if (m_bFrame)
+                tileFrameSize += 1;
+
+            pictureBox.Location = new Point(mapSizeX * tileFrameSize, mapSizeY * tileFrameSize);
 
             panel1.Invalidate();
         }
@@ -179,11 +184,54 @@ namespace TD_Maptool
 
             graphics.TranslateTransform(panel1.AutoScrollPosition.X, panel1.AutoScrollPosition.Y);
 
-            for (int i = 0; i < mapSizeY; i++)
+            int i, j;
+
+            for (i = 0; i < mapSizeY; i++)
             {
-                for (int j = 0; j < mapSizeX; j++)
+                for (j = 0; j < mapSizeX; j++)
                 {
-                    graphics.DrawImage(m_Image[m_Map[i, j]], j * tileSizeXY, i * tileSizeXY);
+                    int x = (j * tileSizeXY);
+                    int y = (i * tileSizeXY);
+
+                    if (m_bFrame)
+                    {
+                        x += j;
+                        y += i;
+                    }
+
+                    graphics.DrawImage(m_Image[m_Map[i, j]], x, y);
+                }
+            }
+
+            if(m_bFrame)
+            {
+                Pen pen = new Pen(Color.Black);
+                Point pt1, pt2;
+                int x, y ;
+
+                for(i = 0; i < mapSizeX || i < mapSizeY; i++)
+                {
+                    if(i<mapSizeX)
+                    {
+                        x = (i + 1) * tileSizeXY + i;
+                        y = (mapSizeY * tileSizeXY) + (mapSizeY - 1);
+
+                        pt1 = new Point(x, 0) ;
+                        pt2 = new Point(x, y) ;
+
+                        graphics.DrawLine(pen, pt1, pt2);
+                    }
+
+                    if(i<mapSizeY)
+                    {
+                        x = (mapSizeX * tileSizeXY) + (mapSizeX - 1);
+                        y = (i + 1) * tileSizeXY + i;
+
+                        pt1 = new Point(0, y);
+                        pt2 = new Point(x, y);
+
+                        graphics.DrawLine(pen, pt1, pt2);
+                    }
                 }
             }
         }
@@ -225,8 +273,10 @@ namespace TD_Maptool
         {
             m_bDrag = true;
 
-            int X = (e.X - panel1.AutoScrollPosition.X) / tileSizeXY;
-            int Y = (e.Y - panel1.AutoScrollPosition.Y) / tileSizeXY;
+            int X = new int();
+            int Y = new int();
+
+            GetPosMouseToTile(e, ref X, ref Y);
 
             replaceTile(X, Y);
         }
@@ -238,25 +288,15 @@ namespace TD_Maptool
 
         private void panel1_MouseMove(object sender, MouseEventArgs e)
         {
-            int X = (e.X - panel1.AutoScrollPosition.X) / tileSizeXY;
-            int Y = (e.Y - panel1.AutoScrollPosition.Y) / tileSizeXY;
+            int X = new int();
+            int Y = new int();
+
+            GetPosMouseToTile(e, ref X, ref Y);
+
+            replaceTile(X, Y);
 
             textBox_PosX.Text = X.ToString();
             textBox_PosY.Text = Y.ToString();
-
-            replaceTile(X, Y);
-        }
-
-        private void replaceTile(int x, int y)
-        {
-            if (!m_bDrag || prevSelectedIndex == -1)
-                return;
-
-            if ((x >= 0 && y >= 0) && (x < mapSizeX && y < mapSizeY))
-            {
-                m_Map[y, x] = prevSelectedIndex;
-                panel1.Invalidate();
-            }
         }
 
         private void infoToolStripMenuItem_Click(object sender, EventArgs e)
@@ -275,6 +315,48 @@ namespace TD_Maptool
             panel1.Invalidate();
             listBox_Tile.ItemHeight = tileSizeXY;
             listBox_Tile.Invalidate();
+        }
+
+        private void frameToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            m_bFrame = !m_bFrame;
+            frameToolStripMenuItem.Checked = m_bFrame;
+
+            ResizePictureBoxLocation();
+            panel1.Invalidate();
+        }
+
+        /**********************************************************************/
+
+        private void ResizePictureBoxLocation()
+        {
+            int tileFrameSize = tileSizeXY;
+            if (m_bFrame)
+                tileFrameSize += 1;
+
+            pictureBox.Location = new Point(mapSizeX * tileFrameSize, mapSizeY * tileFrameSize);
+        }
+
+        private void GetPosMouseToTile(MouseEventArgs e, ref int x, ref int y)
+        {
+            int tileFrameSize = tileSizeXY;
+            if (m_bFrame)
+                tileFrameSize += 1;
+
+            x = (e.X - panel1.AutoScrollPosition.X) / tileFrameSize;
+            y = (e.Y - panel1.AutoScrollPosition.Y) / tileFrameSize;
+        }
+
+        private void replaceTile(int x, int y)
+        {
+            if (!m_bDrag || prevSelectedIndex == -1)
+                return;
+
+            if ((x >= 0 && y >= 0) && (x < mapSizeX && y < mapSizeY))
+            {
+                m_Map[y, x] = prevSelectedIndex;
+                panel1.Invalidate();
+            }
         }
     }
 }
