@@ -43,10 +43,13 @@
             this.textBox_SizeX = new System.Windows.Forms.TextBox();
             this.textBox_SizeY = new System.Windows.Forms.TextBox();
             this.Label_SizeX = new System.Windows.Forms.Label();
-            this.Label_SizeY = new System.Windows.Forms.Label();
             this.listBox_Tile = new System.Windows.Forms.ListBox();
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
             this.saveFileDialog1 = new System.Windows.Forms.SaveFileDialog();
+            this.label1 = new System.Windows.Forms.Label();
+            this.label2 = new System.Windows.Forms.Label();
+            this.textBox_PosY = new System.Windows.Forms.TextBox();
+            this.textBox_PosX = new System.Windows.Forms.TextBox();
             this.panel1 = new TD_Maptool.DoubleBufferPanel();
             this.pictureBox = new System.Windows.Forms.PictureBox();
             this.menuStrip1.SuspendLayout();
@@ -146,7 +149,7 @@
             // textBox_SizeX
             // 
             this.textBox_SizeX.Enabled = false;
-            this.textBox_SizeX.Location = new System.Drawing.Point(178, 46);
+            this.textBox_SizeX.Location = new System.Drawing.Point(12, 46);
             this.textBox_SizeX.Name = "textBox_SizeX";
             this.textBox_SizeX.Size = new System.Drawing.Size(68, 21);
             this.textBox_SizeX.TabIndex = 2;
@@ -155,7 +158,7 @@
             // textBox_SizeY
             // 
             this.textBox_SizeY.Enabled = false;
-            this.textBox_SizeY.Location = new System.Drawing.Point(252, 46);
+            this.textBox_SizeY.Location = new System.Drawing.Point(86, 46);
             this.textBox_SizeY.Name = "textBox_SizeY";
             this.textBox_SizeY.Size = new System.Drawing.Size(68, 21);
             this.textBox_SizeY.TabIndex = 3;
@@ -164,20 +167,11 @@
             // Label_SizeX
             // 
             this.Label_SizeX.AutoSize = true;
-            this.Label_SizeX.Location = new System.Drawing.Point(178, 31);
+            this.Label_SizeX.Location = new System.Drawing.Point(12, 31);
             this.Label_SizeX.Name = "Label_SizeX";
-            this.Label_SizeX.Size = new System.Drawing.Size(13, 12);
+            this.Label_SizeX.Size = new System.Drawing.Size(59, 12);
             this.Label_SizeX.TabIndex = 4;
-            this.Label_SizeX.Text = "X";
-            // 
-            // Label_SizeY
-            // 
-            this.Label_SizeY.AutoSize = true;
-            this.Label_SizeY.Location = new System.Drawing.Point(250, 31);
-            this.Label_SizeY.Name = "Label_SizeY";
-            this.Label_SizeY.Size = new System.Drawing.Size(13, 12);
-            this.Label_SizeY.TabIndex = 5;
-            this.Label_SizeY.Text = "Y";
+            this.Label_SizeX.Text = "Map Size";
             // 
             // listBox_Tile
             // 
@@ -202,6 +196,42 @@
             this.saveFileDialog1.Filter = "dat 파일|*.dat|모든 파일|*.*";
             this.saveFileDialog1.InitialDirectory = "./";
             this.saveFileDialog1.Tag = "";
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(250, 31);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(13, 12);
+            this.label1.TabIndex = 10;
+            this.label1.Text = "Y";
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(178, 31);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(13, 12);
+            this.label2.TabIndex = 9;
+            this.label2.Text = "X";
+            // 
+            // textBox_PosY
+            // 
+            this.textBox_PosY.Enabled = false;
+            this.textBox_PosY.Location = new System.Drawing.Point(252, 46);
+            this.textBox_PosY.Name = "textBox_PosY";
+            this.textBox_PosY.Size = new System.Drawing.Size(68, 21);
+            this.textBox_PosY.TabIndex = 8;
+            this.textBox_PosY.Text = "0";
+            // 
+            // textBox_PosX
+            // 
+            this.textBox_PosX.Enabled = false;
+            this.textBox_PosX.Location = new System.Drawing.Point(178, 46);
+            this.textBox_PosX.Name = "textBox_PosX";
+            this.textBox_PosX.Size = new System.Drawing.Size(68, 21);
+            this.textBox_PosX.TabIndex = 7;
+            this.textBox_PosX.Text = "0";
             // 
             // panel1
             // 
@@ -230,9 +260,12 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(830, 726);
+            this.Controls.Add(this.label1);
+            this.Controls.Add(this.label2);
+            this.Controls.Add(this.textBox_PosY);
+            this.Controls.Add(this.textBox_PosX);
             this.Controls.Add(this.listBox_Tile);
             this.Controls.Add(this.panel1);
-            this.Controls.Add(this.Label_SizeY);
             this.Controls.Add(this.Label_SizeX);
             this.Controls.Add(this.textBox_SizeY);
             this.Controls.Add(this.textBox_SizeX);
@@ -261,7 +294,6 @@
         private System.Windows.Forms.TextBox textBox_SizeX;
         private System.Windows.Forms.TextBox textBox_SizeY;
         private System.Windows.Forms.Label Label_SizeX;
-        private System.Windows.Forms.Label Label_SizeY;
         private System.Windows.Forms.PictureBox pictureBox;
         private System.Windows.Forms.ListBox listBox_Tile;
         private DoubleBufferPanel panel1;
@@ -272,6 +304,10 @@
         private System.Windows.Forms.ToolStripMenuItem settingToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem tileSizeToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem resizeToolStripMenuItem;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.TextBox textBox_PosY;
+        private System.Windows.Forms.TextBox textBox_PosX;
     }
 }
 

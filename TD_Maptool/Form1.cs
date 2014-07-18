@@ -224,6 +224,11 @@ namespace TD_Maptool
         private void panel1_MouseDown(object sender, MouseEventArgs e)
         {
             m_bDrag = true;
+
+            int X = (e.X - panel1.AutoScrollPosition.X) / tileSizeXY;
+            int Y = (e.Y - panel1.AutoScrollPosition.Y) / tileSizeXY;
+
+            replaceTile(X, Y);
         }
 
         private void panel1_MouseUp(object sender, MouseEventArgs e)
@@ -233,15 +238,23 @@ namespace TD_Maptool
 
         private void panel1_MouseMove(object sender, MouseEventArgs e)
         {
-            if (!m_bDrag || prevSelectedIndex == -1)
-                return;
-
             int X = (e.X - panel1.AutoScrollPosition.X) / tileSizeXY;
             int Y = (e.Y - panel1.AutoScrollPosition.Y) / tileSizeXY;
 
-            if ((X >= 0 && Y >= 0) && (X < mapSizeX && Y < mapSizeY))
+            textBox_PosX.Text = X.ToString();
+            textBox_PosY.Text = Y.ToString();
+
+            replaceTile(X, Y);
+        }
+
+        private void replaceTile(int x, int y)
+        {
+            if (!m_bDrag || prevSelectedIndex == -1)
+                return;
+
+            if ((x >= 0 && y >= 0) && (x < mapSizeX && y < mapSizeY))
             {
-                m_Map[Y, X] = prevSelectedIndex;
+                m_Map[y, x] = prevSelectedIndex;
                 panel1.Invalidate();
             }
         }
