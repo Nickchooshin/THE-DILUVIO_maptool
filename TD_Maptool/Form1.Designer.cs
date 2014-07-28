@@ -57,6 +57,7 @@
             this.button_Pen = new System.Windows.Forms.Button();
             this.button_Mouse = new System.Windows.Forms.Button();
             this.button_Link = new System.Windows.Forms.Button();
+            this.button_LinkDelete = new System.Windows.Forms.Button();
             this.panel1 = new TD_Maptool.DoubleBufferPanel();
             this.pictureBox = new System.Windows.Forms.PictureBox();
             this.button_LinkDelete = new System.Windows.Forms.Button();
@@ -303,6 +304,16 @@
             this.button_Link.Text = "Link";
             this.button_Link.UseVisualStyleBackColor = true;
             this.button_Link.Click += new System.EventHandler(this.button_Link_Click);
+            // 
+            // button_LinkDelete
+            // 
+            this.button_LinkDelete.Location = new System.Drawing.Point(750, 73);
+            this.button_LinkDelete.Name = "button_LinkDelete";
+            this.button_LinkDelete.Size = new System.Drawing.Size(68, 28);
+            this.button_LinkDelete.TabIndex = 17;
+            this.button_LinkDelete.Text = "Delete";
+            this.button_LinkDelete.UseVisualStyleBackColor = true;
+            this.button_LinkDelete.Click += new System.EventHandler(this.button_LinkDelete_Click);
             // 
             // panel1
             // 

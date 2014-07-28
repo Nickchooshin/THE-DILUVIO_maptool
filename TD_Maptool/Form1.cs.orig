@@ -240,7 +240,11 @@ namespace TD_Maptool
             if (m_nNumLinkList == 0)
                 return;
 
+<<<<<<< HEAD
+            StringBuilder LinkFilePath = new StringBuilder(openFileDialog1.FileName);
+=======
             StringBuilder LinkFilePath = new StringBuilder(saveFileDialog1.FileName);
+>>>>>>> develop
             LinkFilePath.Replace("dat", "link", LinkFilePath.Length - 3, 3);
 
             file = new FileStream(LinkFilePath.ToString(), FileMode.Create, FileAccess.Write);
@@ -271,7 +275,8 @@ namespace TD_Maptool
                 writer.WriteLine(LinkIndex[i].X + " " + LinkIndex[i].Y + "\t" + LinkList[i].X + " " + LinkList[i].Y);
             }
 
-            writer.Close();        }
+            writer.Close();
+        }
 
         private void exitToolStripMenuItem_Click(object sender, EventArgs e)
         {
