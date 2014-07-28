@@ -59,6 +59,7 @@
             this.button_Link = new System.Windows.Forms.Button();
             this.panel1 = new TD_Maptool.DoubleBufferPanel();
             this.pictureBox = new System.Windows.Forms.PictureBox();
+            this.button_LinkDelete = new System.Windows.Forms.Button();
             this.menuStrip1.SuspendLayout();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox)).BeginInit();
@@ -295,7 +296,7 @@
             // 
             // button_Link
             // 
-            this.button_Link.Location = new System.Drawing.Point(750, 73);
+            this.button_Link.Location = new System.Drawing.Point(676, 73);
             this.button_Link.Name = "button_Link";
             this.button_Link.Size = new System.Drawing.Size(68, 28);
             this.button_Link.TabIndex = 16;
@@ -325,11 +326,22 @@
             this.pictureBox.TabIndex = 0;
             this.pictureBox.TabStop = false;
             // 
+            // button_LinkDelete
+            // 
+            this.button_LinkDelete.Location = new System.Drawing.Point(750, 73);
+            this.button_LinkDelete.Name = "button_LinkDelete";
+            this.button_LinkDelete.Size = new System.Drawing.Size(68, 28);
+            this.button_LinkDelete.TabIndex = 17;
+            this.button_LinkDelete.Text = "Delete";
+            this.button_LinkDelete.UseVisualStyleBackColor = true;
+            this.button_LinkDelete.Click += new System.EventHandler(this.button_LinkDelete_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(830, 760);
+            this.Controls.Add(this.button_LinkDelete);
             this.Controls.Add(this.button_Link);
             this.Controls.Add(this.button_Mouse);
             this.Controls.Add(this.button_Pen);
@@ -391,6 +403,7 @@
         private System.Windows.Forms.Button button_Pen;
         private System.Windows.Forms.Button button_Mouse;
         private System.Windows.Forms.Button button_Link;
+        private System.Windows.Forms.Button button_LinkDelete;
     }
 }
 
