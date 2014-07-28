@@ -15,12 +15,18 @@ namespace TD_Maptool
     {
         private int tileSizeXY = 32;
         private int mapSizeX = 0, mapSizeY = 0;
+        private XmlNodeList m_NodeList;
         private int[,] m_Map;
         private Image[] m_Image;
         private int prevSelectedIndex = -1;
-        private XmlNodeList m_NodeList;
+        private Point[,] m_LinkList;
+        private Point selectPoint = new Point(0, 0);
         private bool m_bDrag = false;
         private bool m_bFrame = false;
+        private bool m_bLinkUI = false;
+
+        private enum Pen_State { PEN=0, MOUSE } ;
+        private Pen_State m_PenState = Pen_State.PEN;
 
         public Form1()
         {
@@ -40,6 +46,8 @@ namespace TD_Maptool
                 listBox_Tile.Items.Add(Node["name"].InnerText.ToString());
                 m_Image[i++] = Image.FromFile(Node["image"].InnerText.ToString());
             }
+
+            VisibleLinkUI(false);
         }
 
         private void newToolStripMenuItem_Click(object sender, EventArgs e)
@@ -51,12 +59,14 @@ namespace TD_Maptool
             form.GetMapSize(ref mapSizeX, ref mapSizeY);
 
             m_Map = new int[mapSizeY, mapSizeX];
+            m_LinkList = new Point[mapSizeY, mapSizeX];
 
             for (int i = 0; i < mapSizeY; i++)
             {
                 for (int j = 0; j < mapSizeX; j++)
                 {
                     m_Map[i, j] = 0;
+                    m_LinkList[i, j] = new Point(-1, -1);
                 }
             }
 
@@ -80,6 +90,7 @@ namespace TD_Maptool
             form.GetMapSize(ref mapSizeX, ref mapSizeY);
 
             int[,] map = new int[mapSizeY, mapSizeX];
+            Point[,] linkList = new Point[mapSizeY, mapSizeX];
 
             if (prevSizeX > mapSizeX)
                 prevSizeX = mapSizeX;
@@ -91,6 +102,7 @@ namespace TD_Maptool
                 for (int j = 0; j < mapSizeX; j++)
                 {
                     map[i, j] = 0;
+                    linkList[i, j] = new Point(-1, -1);
                 }
             }
 
@@ -99,10 +111,12 @@ namespace TD_Maptool
                 for (int j = 0; j < prevSizeX; j++)
                 {
                     map[i, j] = m_Map[i, j];
+                    linkList[i, j] = m_LinkList[i, j];
                 }
             }
 
             m_Map = map;
+            m_LinkList = linkList;
 
             textBox_SizeX.Text = mapSizeX.ToString();
             textBox_SizeY.Text = mapSizeY.ToString();
@@ -190,16 +204,27 @@ namespace TD_Maptool
             {
                 for (j = 0; j < mapSizeX; j++)
                 {
-                    int x = (j * tileSizeXY);
-                    int y = (i * tileSizeXY);
+                    Point point = new Point();
+                    point.X = (j * tileSizeXY);
+                    point.Y = (i * tileSizeXY);
 
                     if (m_bFrame)
                     {
-                        x += j;
-                        y += i;
+                        point.X += j;
+                        point.Y += i;
                     }
 
-                    graphics.DrawImage(m_Image[m_Map[i, j]], x, y);
+                    graphics.DrawImage(m_Image[m_Map[i, j]], point);
+
+                    if (m_bLinkUI && (m_LinkList[i, j].X != -1 && m_LinkList[i, j].Y != -1))
+                    {
+                        Pen pen = new Pen(Color.Black);
+                        Brush brush = Brushes.PaleVioletRed;
+                        Rectangle rect = new Rectangle(point.X + 3, point.Y + 3, tileSizeXY - 6, tileSizeXY - 6);
+
+                        graphics.FillRectangle(brush, rect);
+                        graphics.DrawRectangle(pen, rect);
+                    }
                 }
             }
 
@@ -234,6 +259,20 @@ namespace TD_Maptool
                     }
                 }
             }
+
+            if (m_bLinkUI)
+            {
+                Pen pen = new Pen(Color.Red, 2);
+                Rectangle rect = new Rectangle(selectPoint.X * tileSizeXY, selectPoint.Y * tileSizeXY, tileSizeXY, tileSizeXY);
+
+                if (m_bFrame)
+                {
+                    rect.X += selectPoint.X;
+                    rect.Y += selectPoint.Y;
+                }
+
+                graphics.DrawRectangle(pen, rect);
+            }
         }
 
         private void panel1_Scroll(object sender, ScrollEventArgs e)
@@ -251,13 +290,14 @@ namespace TD_Maptool
             else
                 brush = Brushes.Black;
 
-            int x = e.Bounds.X + e.Font.Height + tileSizeXY;
-            int y = e.Bounds.Y + (listBox_Tile.ItemHeight / 2) - (e.Font.Height / 2);
+            Point point = new Point();
+            point.X = e.Bounds.X + e.Font.Height + tileSizeXY;
+            point.Y = e.Bounds.Y + (listBox_Tile.ItemHeight / 2) - (e.Font.Height / 2);
 
             XmlNode Node = m_NodeList[e.Index];
             Image img = Image.FromFile(Node["image"].InnerText.ToString());
             e.Graphics.DrawImage(img, 0, e.Bounds.Y);
-            e.Graphics.DrawString(listBox_Tile.Items[e.Index].ToString(), e.Font, brush, x, y, StringFormat.GenericDefault);
+            e.Graphics.DrawString(listBox_Tile.Items[e.Index].ToString(), e.Font, brush, point, StringFormat.GenericDefault);
             e.DrawFocusRectangle();
         }
 
@@ -278,7 +318,7 @@ namespace TD_Maptool
 
             GetPosMouseToTile(e, ref X, ref Y);
 
-            replaceTile(X, Y);
+            clickTile(X, Y);
         }
 
         private void panel1_MouseUp(object sender, MouseEventArgs e)
@@ -293,7 +333,7 @@ namespace TD_Maptool
 
             GetPosMouseToTile(e, ref X, ref Y);
 
-            replaceTile(X, Y);
+            clickTile(X, Y);
 
             textBox_PosX.Text = X.ToString();
             textBox_PosY.Text = Y.ToString();
@@ -326,7 +366,43 @@ namespace TD_Maptool
             panel1.Invalidate();
         }
 
+        private void button_Pen_Click(object sender, EventArgs e)
+        {
+            m_PenState = Pen_State.PEN;
+
+            VisibleLinkUI(false);
+        }
+
+        private void button_Mouse_Click(object sender, EventArgs e)
+        {
+            m_PenState = Pen_State.MOUSE;
+
+            VisibleLinkUI(true);
+        }
+
+        private void button_Link_Click(object sender, EventArgs e)
+        {
+            int LinkX = int.Parse(textBox_LinkX.Text);
+            int LinkY = int.Parse(textBox_LinkY.Text);
+            Point pointLink = new Point(LinkX, LinkY);
+
+            m_LinkList[selectPoint.Y, selectPoint.X] = pointLink;
+
+            panel1.Invalidate();
+        }
+
         /**********************************************************************/
+
+        private void VisibleLinkUI(bool bFlag)
+        {
+            m_bLinkUI = bFlag;
+            label_Link.Visible = bFlag;
+            textBox_LinkX.Visible = bFlag;
+            textBox_LinkY.Visible = bFlag;
+            button_Link.Visible = bFlag;
+
+            panel1.Invalidate();
+        }
 
         private void ResizePictureBoxLocation()
         {
@@ -347,16 +423,42 @@ namespace TD_Maptool
             y = (e.Y - panel1.AutoScrollPosition.Y) / tileFrameSize;
         }
 
+        private void clickTile(int x, int y)
+        {
+            if (m_bDrag &&
+                (x >= 0 && y >= 0) && (x < mapSizeX && y < mapSizeY))
+            {
+                if (m_PenState == Pen_State.PEN)
+                {
+                    replaceTile(x, y);
+                }
+                else if (m_PenState == Pen_State.MOUSE)
+                {
+                    selectTile(x, y);
+                }
+            }
+        }
+
         private void replaceTile(int x, int y)
         {
-            if (!m_bDrag || prevSelectedIndex == -1)
+            if (prevSelectedIndex == -1)
                 return;
 
-            if ((x >= 0 && y >= 0) && (x < mapSizeX && y < mapSizeY))
-            {
-                m_Map[y, x] = prevSelectedIndex;
-                panel1.Invalidate();
-            }
+            m_Map[y, x] = prevSelectedIndex;
+
+            panel1.Invalidate();
+        }
+
+        private void selectTile(int x, int y)
+        {
+            selectPoint.X = x;
+            selectPoint.Y = y;
+
+            Point pointLink = m_LinkList[selectPoint.Y, selectPoint.X];
+            textBox_LinkX.Text = pointLink.X.ToString();
+            textBox_LinkY.Text = pointLink.Y.ToString();
+
+            panel1.Invalidate();
         }
     }
 }

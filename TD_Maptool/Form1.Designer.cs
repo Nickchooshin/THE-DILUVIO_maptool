@@ -51,6 +51,12 @@
             this.label2 = new System.Windows.Forms.Label();
             this.textBox_PosY = new System.Windows.Forms.TextBox();
             this.textBox_PosX = new System.Windows.Forms.TextBox();
+            this.label_Link = new System.Windows.Forms.Label();
+            this.textBox_LinkY = new System.Windows.Forms.TextBox();
+            this.textBox_LinkX = new System.Windows.Forms.TextBox();
+            this.button_Pen = new System.Windows.Forms.Button();
+            this.button_Mouse = new System.Windows.Forms.Button();
+            this.button_Link = new System.Windows.Forms.Button();
             this.panel1 = new TD_Maptool.DoubleBufferPanel();
             this.pictureBox = new System.Windows.Forms.PictureBox();
             this.menuStrip1.SuspendLayout();
@@ -187,7 +193,7 @@
             this.listBox_Tile.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
             this.listBox_Tile.FormattingEnabled = true;
             this.listBox_Tile.ItemHeight = 32;
-            this.listBox_Tile.Location = new System.Drawing.Point(12, 73);
+            this.listBox_Tile.Location = new System.Drawing.Point(12, 107);
             this.listBox_Tile.Name = "listBox_Tile";
             this.listBox_Tile.Size = new System.Drawing.Size(160, 580);
             this.listBox_Tile.TabIndex = 1;
@@ -242,11 +248,66 @@
             this.textBox_PosX.TabIndex = 7;
             this.textBox_PosX.Text = "0";
             // 
+            // label_Link
+            // 
+            this.label_Link.AutoSize = true;
+            this.label_Link.Location = new System.Drawing.Point(676, 31);
+            this.label_Link.Name = "label_Link";
+            this.label_Link.Size = new System.Drawing.Size(28, 12);
+            this.label_Link.TabIndex = 13;
+            this.label_Link.Text = "Link";
+            // 
+            // textBox_LinkY
+            // 
+            this.textBox_LinkY.Location = new System.Drawing.Point(750, 46);
+            this.textBox_LinkY.Name = "textBox_LinkY";
+            this.textBox_LinkY.Size = new System.Drawing.Size(68, 21);
+            this.textBox_LinkY.TabIndex = 12;
+            this.textBox_LinkY.Text = "0";
+            // 
+            // textBox_LinkX
+            // 
+            this.textBox_LinkX.Location = new System.Drawing.Point(676, 46);
+            this.textBox_LinkX.Name = "textBox_LinkX";
+            this.textBox_LinkX.Size = new System.Drawing.Size(68, 21);
+            this.textBox_LinkX.TabIndex = 11;
+            this.textBox_LinkX.Text = "0";
+            // 
+            // button_Pen
+            // 
+            this.button_Pen.Image = ((System.Drawing.Image)(resources.GetObject("button_Pen.Image")));
+            this.button_Pen.Location = new System.Drawing.Point(12, 73);
+            this.button_Pen.Name = "button_Pen";
+            this.button_Pen.Size = new System.Drawing.Size(28, 28);
+            this.button_Pen.TabIndex = 14;
+            this.button_Pen.UseVisualStyleBackColor = true;
+            this.button_Pen.Click += new System.EventHandler(this.button_Pen_Click);
+            // 
+            // button_Mouse
+            // 
+            this.button_Mouse.Image = ((System.Drawing.Image)(resources.GetObject("button_Mouse.Image")));
+            this.button_Mouse.Location = new System.Drawing.Point(43, 73);
+            this.button_Mouse.Name = "button_Mouse";
+            this.button_Mouse.Size = new System.Drawing.Size(28, 28);
+            this.button_Mouse.TabIndex = 15;
+            this.button_Mouse.UseVisualStyleBackColor = true;
+            this.button_Mouse.Click += new System.EventHandler(this.button_Mouse_Click);
+            // 
+            // button_Link
+            // 
+            this.button_Link.Location = new System.Drawing.Point(750, 73);
+            this.button_Link.Name = "button_Link";
+            this.button_Link.Size = new System.Drawing.Size(68, 28);
+            this.button_Link.TabIndex = 16;
+            this.button_Link.Text = "Link";
+            this.button_Link.UseVisualStyleBackColor = true;
+            this.button_Link.Click += new System.EventHandler(this.button_Link_Click);
+            // 
             // panel1
             // 
             this.panel1.AutoScroll = true;
             this.panel1.Controls.Add(this.pictureBox);
-            this.panel1.Location = new System.Drawing.Point(178, 73);
+            this.panel1.Location = new System.Drawing.Point(178, 107);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(640, 640);
             this.panel1.TabIndex = 6;
@@ -268,7 +329,13 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(830, 726);
+            this.ClientSize = new System.Drawing.Size(830, 760);
+            this.Controls.Add(this.button_Link);
+            this.Controls.Add(this.button_Mouse);
+            this.Controls.Add(this.button_Pen);
+            this.Controls.Add(this.label_Link);
+            this.Controls.Add(this.textBox_LinkY);
+            this.Controls.Add(this.textBox_LinkX);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.textBox_PosY);
@@ -318,6 +385,12 @@
         private System.Windows.Forms.TextBox textBox_PosY;
         private System.Windows.Forms.TextBox textBox_PosX;
         private System.Windows.Forms.ToolStripMenuItem frameToolStripMenuItem;
+        private System.Windows.Forms.Label label_Link;
+        private System.Windows.Forms.TextBox textBox_LinkY;
+        private System.Windows.Forms.TextBox textBox_LinkX;
+        private System.Windows.Forms.Button button_Pen;
+        private System.Windows.Forms.Button button_Mouse;
+        private System.Windows.Forms.Button button_Link;
     }
 }
 
