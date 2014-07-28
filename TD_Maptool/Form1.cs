@@ -19,6 +19,7 @@ namespace TD_Maptool
         private int[,] m_Map;
         private Image[] m_Image;
         private int prevSelectedIndex = -1;
+        private int m_nNumLinkList=0;
         private Point[,] m_LinkList;
         private Point selectPoint = new Point(0, 0);
         private bool m_bDrag = false;
@@ -132,6 +133,8 @@ namespace TD_Maptool
                 return;
             string FilePath = openFileDialog1.FileName;
 
+            // Open Map .dat file
+
             FileStream file = new FileStream(FilePath, FileMode.OpenOrCreate, FileAccess.Read);
             StreamReader reader = new StreamReader(file);
 
@@ -154,6 +157,50 @@ namespace TD_Maptool
 
             reader.Close();
 
+            // Open Map .link file
+
+            m_LinkList = new Point[mapSizeY, mapSizeX];
+
+            for (int i = 0; i < mapSizeY; i++)
+            {
+                for (int j = 0; j < mapSizeX; j++)
+                {
+                    m_LinkList[i, j] = new Point(-1, -1);
+                }
+            }
+
+            try
+            {
+                StringBuilder LinkFilePath = new StringBuilder(openFileDialog1.FileName);
+                LinkFilePath.Replace("dat", "link", LinkFilePath.Length - 3, 3);
+
+                file = new FileStream(LinkFilePath.ToString(), FileMode.Open, FileAccess.Read);
+                reader = new StreamReader(file);
+
+                str = reader.scanf();
+
+                m_nNumLinkList = int.Parse(str[0]);
+
+                //m_LinkList = new Point[mapSizeY, mapSizeX];
+
+                for (int i = 0; i < m_nNumLinkList; i++)
+                {
+                    str = reader.scanf();
+
+                    Point pointLink = new Point(int.Parse(str[0]), int.Parse(str[1]));
+                    Point pointLinked = new Point(int.Parse(str[2]), int.Parse(str[3]));
+
+                    m_LinkList[pointLink.Y, pointLink.X] = pointLinked;
+                }
+
+                reader.Close();
+            }
+            catch (FileNotFoundException exception)
+            {
+            }
+
+            // Resize panel1 scroll
+
             int tileFrameSize = tileSizeXY;
             if (m_bFrame)
                 tileFrameSize += 1;
@@ -169,6 +216,8 @@ namespace TD_Maptool
                 return;
             string FilePath = saveFileDialog1.FileName;
 
+            // Save Map .dat file
+
             FileStream file = new FileStream(FilePath, FileMode.Create, FileAccess.Write);
             StreamWriter writer = new StreamWriter(file);
 
@@ -182,6 +231,44 @@ namespace TD_Maptool
                 }
 
                 writer.WriteLine();
+            }
+
+            writer.Close();
+
+            // Save Map .link file
+
+            if (m_nNumLinkList == 0)
+                return;
+
+            StringBuilder LinkFilePath = new StringBuilder(saveFileDialog1.FileName);
+            LinkFilePath.Replace("dat", "link", LinkFilePath.Length - 3, 3);
+
+            file = new FileStream(LinkFilePath.ToString(), FileMode.Create, FileAccess.Write);
+            writer = new StreamWriter(file);
+
+            int numLinkList = 0;
+            Point[] LinkIndex = new Point[m_nNumLinkList];
+            Point[] LinkList = new Point[m_nNumLinkList];
+            Point temp = new Point(-1, -1) ;
+
+            for (int i = 0; i < mapSizeY && numLinkList != m_nNumLinkList; i++)
+            {
+                for (int j = 0; j < mapSizeX && numLinkList != m_nNumLinkList; j++)
+                {
+                    if (m_LinkList[i, j] != temp)
+                    {
+                        LinkIndex[numLinkList] = new Point(j, i);
+                        LinkList[numLinkList] = m_LinkList[i, j];
+                        ++numLinkList;
+                    }
+                }
+            }
+
+            writer.WriteLine(numLinkList);
+
+            for (int i = 0; i < numLinkList; i++)
+            {
+                writer.WriteLine(LinkIndex[i].X + " " + LinkIndex[i].Y + "\t" + LinkList[i].X + " " + LinkList[i].Y);
             }
 
             writer.Close();
@@ -384,9 +471,26 @@ namespace TD_Maptool
         {
             int LinkX = int.Parse(textBox_LinkX.Text);
             int LinkY = int.Parse(textBox_LinkY.Text);
-            Point pointLink = new Point(LinkX, LinkY);
+            Point pointLinked = new Point(LinkX, LinkY);
 
-            m_LinkList[selectPoint.Y, selectPoint.X] = pointLink;
+            // m_nNumLinkList Count
+            Point temp = new Point(-1, -1) ;
+            if (m_LinkList[selectPoint.Y, selectPoint.X] == temp && pointLinked != temp)
+                ++m_nNumLinkList;
+
+            m_LinkList[selectPoint.Y, selectPoint.X] = pointLinked;
+
+            panel1.Invalidate();
+        }
+
+        private void button_LinkDelete_Click(object sender, EventArgs e)
+        {
+            // m_nNumLinkList Count
+            Point temp = new Point(-1, -1);
+            if (m_LinkList[selectPoint.Y, selectPoint.X] != temp)
+                --m_nNumLinkList;
+
+            m_LinkList[selectPoint.Y, selectPoint.X] = temp;
 
             panel1.Invalidate();
         }
@@ -400,6 +504,7 @@ namespace TD_Maptool
             textBox_LinkX.Visible = bFlag;
             textBox_LinkY.Visible = bFlag;
             button_Link.Visible = bFlag;
+            button_LinkDelete.Visible = bFlag;
 
             panel1.Invalidate();
         }
