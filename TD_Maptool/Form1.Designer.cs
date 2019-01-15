@@ -58,6 +58,8 @@
             this.button_Mouse = new System.Windows.Forms.Button();
             this.button_Link = new System.Windows.Forms.Button();
             this.button_LinkDelete = new System.Windows.Forms.Button();
+            this.tileSetToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.openFileDialog2 = new System.Windows.Forms.OpenFileDialog();
             this.panel1 = new TD_Maptool.DoubleBufferPanel();
             this.pictureBox = new System.Windows.Forms.PictureBox();
             this.menuStrip1.SuspendLayout();
@@ -92,41 +94,42 @@
             // newToolStripMenuItem
             // 
             this.newToolStripMenuItem.Name = "newToolStripMenuItem";
-            this.newToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.newToolStripMenuItem.Size = new System.Drawing.Size(107, 22);
             this.newToolStripMenuItem.Text = "New";
             this.newToolStripMenuItem.Click += new System.EventHandler(this.newToolStripMenuItem_Click);
             // 
             // resizeToolStripMenuItem
             // 
             this.resizeToolStripMenuItem.Name = "resizeToolStripMenuItem";
-            this.resizeToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.resizeToolStripMenuItem.Size = new System.Drawing.Size(107, 22);
             this.resizeToolStripMenuItem.Text = "Resize";
             this.resizeToolStripMenuItem.Click += new System.EventHandler(this.resizeToolStripMenuItem_Click);
             // 
             // oepnToolStripMenuItem
             // 
             this.oepnToolStripMenuItem.Name = "oepnToolStripMenuItem";
-            this.oepnToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.oepnToolStripMenuItem.Size = new System.Drawing.Size(107, 22);
             this.oepnToolStripMenuItem.Text = "Open";
             this.oepnToolStripMenuItem.Click += new System.EventHandler(this.oepnToolStripMenuItem_Click);
             // 
             // saveToolStripMenuItem
             // 
             this.saveToolStripMenuItem.Name = "saveToolStripMenuItem";
-            this.saveToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.saveToolStripMenuItem.Size = new System.Drawing.Size(107, 22);
             this.saveToolStripMenuItem.Text = "Save";
             this.saveToolStripMenuItem.Click += new System.EventHandler(this.saveToolStripMenuItem_Click);
             // 
             // exitToolStripMenuItem
             // 
             this.exitToolStripMenuItem.Name = "exitToolStripMenuItem";
-            this.exitToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.exitToolStripMenuItem.Size = new System.Drawing.Size(107, 22);
             this.exitToolStripMenuItem.Text = "Exit";
             this.exitToolStripMenuItem.Click += new System.EventHandler(this.exitToolStripMenuItem_Click);
             // 
             // settingToolStripMenuItem
             // 
             this.settingToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.tileSetToolStripMenuItem,
             this.tileSizeToolStripMenuItem,
             this.frameToolStripMenuItem});
             this.settingToolStripMenuItem.Name = "settingToolStripMenuItem";
@@ -314,6 +317,18 @@
             this.button_LinkDelete.UseVisualStyleBackColor = true;
             this.button_LinkDelete.Click += new System.EventHandler(this.button_LinkDelete_Click);
             // 
+            // tileSetToolStripMenuItem
+            // 
+            this.tileSetToolStripMenuItem.Name = "tileSetToolStripMenuItem";
+            this.tileSetToolStripMenuItem.Size = new System.Drawing.Size(114, 22);
+            this.tileSetToolStripMenuItem.Text = "TileSet";
+            this.tileSetToolStripMenuItem.Click += new System.EventHandler(this.tileSetToolStripMenuItem_Click);
+            // 
+            // openFileDialog2
+            // 
+            this.openFileDialog2.FileName = "openFileDialog2";
+            this.openFileDialog2.Filter = "xml 파일|*.xml|모든 파일|*.*";
+            // 
             // panel1
             // 
             this.panel1.AutoScroll = true;
@@ -404,6 +419,8 @@
         private System.Windows.Forms.Button button_Mouse;
         private System.Windows.Forms.Button button_Link;
         private System.Windows.Forms.Button button_LinkDelete;
+        private System.Windows.Forms.ToolStripMenuItem tileSetToolStripMenuItem;
+        private System.Windows.Forms.OpenFileDialog openFileDialog2;
     }
 }
 

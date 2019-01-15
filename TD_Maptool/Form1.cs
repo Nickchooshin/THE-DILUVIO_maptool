@@ -34,19 +34,8 @@ namespace TD_Maptool
             InitializeComponent();
 
             listBox_Tile.ItemHeight = tileSizeXY;
-
-            XmlDocument xmlFile = new XmlDocument();
-            xmlFile.Load("Resources/tile_data.xml");
-            m_NodeList = xmlFile.SelectNodes("tile/data");
-
-            m_Image = new Image[m_NodeList.Count];
-
-            int i = 0;
-            foreach (XmlNode Node in m_NodeList)
-            {
-                listBox_Tile.Items.Add(Node["name"].InnerText.ToString());
-                m_Image[i++] = Image.FromFile(Node["image"].InnerText.ToString());
-            }
+            
+            tileSetLoad("Resources/tile_data.xml");
 
             VisibleLinkUI(false);
         }
@@ -370,6 +359,9 @@ namespace TD_Maptool
         {
             e.DrawBackground();
 
+            if (e.Index < 0)
+                return;
+
             Brush brush;
             if (listBox_Tile.SelectedIndex == e.Index)
                 brush = Brushes.White;
@@ -429,6 +421,14 @@ namespace TD_Maptool
         {
             Form3 form = new Form3();
             form.ShowDialog();
+        }
+
+        private void tileSetToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (openFileDialog2.ShowDialog() != DialogResult.OK)
+                return;
+
+            tileSetLoad(openFileDialog2.FileName);
         }
 
         private void tileSizeToolStripMenuItem_Click(object sender, EventArgs e)
@@ -563,6 +563,23 @@ namespace TD_Maptool
             textBox_LinkY.Text = pointLink.Y.ToString();
 
             panel1.Invalidate();
+        }
+
+        private void tileSetLoad(string filePath)
+        {
+            XmlDocument xmlFile = new XmlDocument();
+            xmlFile.Load(filePath);
+            m_NodeList = xmlFile.SelectNodes("tile/data");
+
+            m_Image = new Image[m_NodeList.Count];
+            listBox_Tile.Items.Clear();
+
+            int i = 0;
+            foreach (XmlNode Node in m_NodeList)
+            {
+                listBox_Tile.Items.Add(Node["name"].InnerText.ToString());
+                m_Image[i++] = Image.FromFile(Node["image"].InnerText.ToString());
+            }
         }
     }
 }
