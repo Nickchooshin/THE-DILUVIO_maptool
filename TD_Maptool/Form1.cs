@@ -36,7 +36,7 @@ namespace TD_Maptool
             listBox_Tile.ItemHeight = tileSizeXY;
 
             XmlDocument xmlFile = new XmlDocument();
-            xmlFile.Load("Resource/tile_data.xml");
+            xmlFile.Load("Resources/tile_data.xml");
             m_NodeList = xmlFile.SelectNodes("tile/data");
 
             m_Image = new Image[m_NodeList.Count];

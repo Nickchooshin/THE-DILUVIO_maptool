@@ -9,3 +9,15 @@ C:\Users\Shin\Desktop\학교\대학교\2학년\여름 합숙\THE-DILUVIO_maptool
 C:\Users\Shin\Desktop\학교\대학교\2학년\여름 합숙\THE-DILUVIO_maptool\TD_Maptool\obj\x86\Debug\TD_Maptool.csprojResolveAssemblyReference.cache
 C:\Users\Shin\Desktop\학교\대학교\2학년\여름 합숙\THE-DILUVIO_maptool\TD_Maptool\obj\x86\Debug\TD_Maptool.Form3.resources
 C:\Users\Shin\Desktop\학교\대학교\2학년\여름 합숙\THE-DILUVIO_maptool\TD_Maptool\obj\x86\Debug\TD_Maptool.Form4.resources
+E:\Shin\Documents\Visual Studio 2017\Projects\THE-DILUVIO_maptool\TD_Maptool\bin\Debug\TD_Maptool.exe
+E:\Shin\Documents\Visual Studio 2017\Projects\THE-DILUVIO_maptool\TD_Maptool\bin\Debug\TD_Maptool.pdb
+E:\Shin\Documents\Visual Studio 2017\Projects\THE-DILUVIO_maptool\TD_Maptool\obj\x86\Debug\TD_Maptool.csprojAssemblyReference.cache
+E:\Shin\Documents\Visual Studio 2017\Projects\THE-DILUVIO_maptool\TD_Maptool\obj\x86\Debug\TD_Maptool.Form1.resources
+E:\Shin\Documents\Visual Studio 2017\Projects\THE-DILUVIO_maptool\TD_Maptool\obj\x86\Debug\TD_Maptool.Form2.resources
+E:\Shin\Documents\Visual Studio 2017\Projects\THE-DILUVIO_maptool\TD_Maptool\obj\x86\Debug\TD_Maptool.Form3.resources
+E:\Shin\Documents\Visual Studio 2017\Projects\THE-DILUVIO_maptool\TD_Maptool\obj\x86\Debug\TD_Maptool.Form4.resources
+E:\Shin\Documents\Visual Studio 2017\Projects\THE-DILUVIO_maptool\TD_Maptool\obj\x86\Debug\TD_Maptool.Properties.Resources.resources
+E:\Shin\Documents\Visual Studio 2017\Projects\THE-DILUVIO_maptool\TD_Maptool\obj\x86\Debug\TD_Maptool.csproj.GenerateResource.cache
+E:\Shin\Documents\Visual Studio 2017\Projects\THE-DILUVIO_maptool\TD_Maptool\obj\x86\Debug\TD_Maptool.csproj.CoreCompileInputs.cache
+E:\Shin\Documents\Visual Studio 2017\Projects\THE-DILUVIO_maptool\TD_Maptool\obj\x86\Debug\TD_Maptool.exe
+E:\Shin\Documents\Visual Studio 2017\Projects\THE-DILUVIO_maptool\TD_Maptool\obj\x86\Debug\TD_Maptool.pdb
