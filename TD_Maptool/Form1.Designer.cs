@@ -60,7 +60,6 @@
             this.button_LinkDelete = new System.Windows.Forms.Button();
             this.panel1 = new TD_Maptool.DoubleBufferPanel();
             this.pictureBox = new System.Windows.Forms.PictureBox();
-            this.button_LinkDelete = new System.Windows.Forms.Button();
             this.menuStrip1.SuspendLayout();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox)).BeginInit();
@@ -93,35 +92,35 @@
             // newToolStripMenuItem
             // 
             this.newToolStripMenuItem.Name = "newToolStripMenuItem";
-            this.newToolStripMenuItem.Size = new System.Drawing.Size(107, 22);
+            this.newToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.newToolStripMenuItem.Text = "New";
             this.newToolStripMenuItem.Click += new System.EventHandler(this.newToolStripMenuItem_Click);
             // 
             // resizeToolStripMenuItem
             // 
             this.resizeToolStripMenuItem.Name = "resizeToolStripMenuItem";
-            this.resizeToolStripMenuItem.Size = new System.Drawing.Size(107, 22);
+            this.resizeToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.resizeToolStripMenuItem.Text = "Resize";
             this.resizeToolStripMenuItem.Click += new System.EventHandler(this.resizeToolStripMenuItem_Click);
             // 
             // oepnToolStripMenuItem
             // 
             this.oepnToolStripMenuItem.Name = "oepnToolStripMenuItem";
-            this.oepnToolStripMenuItem.Size = new System.Drawing.Size(107, 22);
-            this.oepnToolStripMenuItem.Text = "Oepn";
+            this.oepnToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.oepnToolStripMenuItem.Text = "Open";
             this.oepnToolStripMenuItem.Click += new System.EventHandler(this.oepnToolStripMenuItem_Click);
             // 
             // saveToolStripMenuItem
             // 
             this.saveToolStripMenuItem.Name = "saveToolStripMenuItem";
-            this.saveToolStripMenuItem.Size = new System.Drawing.Size(107, 22);
+            this.saveToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.saveToolStripMenuItem.Text = "Save";
             this.saveToolStripMenuItem.Click += new System.EventHandler(this.saveToolStripMenuItem_Click);
             // 
             // exitToolStripMenuItem
             // 
             this.exitToolStripMenuItem.Name = "exitToolStripMenuItem";
-            this.exitToolStripMenuItem.Size = new System.Drawing.Size(107, 22);
+            this.exitToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.exitToolStripMenuItem.Text = "Exit";
             this.exitToolStripMenuItem.Click += new System.EventHandler(this.exitToolStripMenuItem_Click);
             // 
@@ -336,16 +335,6 @@
             this.pictureBox.Size = new System.Drawing.Size(1, 1);
             this.pictureBox.TabIndex = 0;
             this.pictureBox.TabStop = false;
-            // 
-            // button_LinkDelete
-            // 
-            this.button_LinkDelete.Location = new System.Drawing.Point(750, 73);
-            this.button_LinkDelete.Name = "button_LinkDelete";
-            this.button_LinkDelete.Size = new System.Drawing.Size(68, 28);
-            this.button_LinkDelete.TabIndex = 17;
-            this.button_LinkDelete.Text = "Delete";
-            this.button_LinkDelete.UseVisualStyleBackColor = true;
-            this.button_LinkDelete.Click += new System.EventHandler(this.button_LinkDelete_Click);
             // 
             // Form1
             // 

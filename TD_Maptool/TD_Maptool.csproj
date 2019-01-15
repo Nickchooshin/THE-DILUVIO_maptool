@@ -37,7 +37,7 @@
     <ApplicationIcon>Diluvio.ico</ApplicationIcon>
   </PropertyGroup>
   <PropertyGroup>
-    <RunPostBuildEvent>Always</RunPostBuildEvent>
+    <RunPostBuildEvent>OnBuildSuccess</RunPostBuildEvent>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
@@ -121,7 +121,7 @@
     </PreBuildEvent>
   </PropertyGroup>
   <PropertyGroup>
-    <PostBuildEvent>xcopy "$(SolutionDir)Resources\*.*" "$(TargetDir)Resources\" /e /h /d /k /y</PostBuildEvent>
+    <PostBuildEvent>xcopy "$(SolutionDir)Resources\*.*" "$(TargetDir)Resources\" /e /h /k /y</PostBuildEvent>
   </PropertyGroup>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
