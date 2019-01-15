@@ -25,6 +25,7 @@ namespace TD_Maptool
         private bool m_bDrag = false;
         private bool m_bFrame = false;
         private bool m_bLinkUI = false;
+        private int m_defaultTile = 0;
 
         private enum Pen_State { PEN=0, MOUSE } ;
         private Pen_State m_PenState = Pen_State.PEN;
@@ -55,7 +56,7 @@ namespace TD_Maptool
             {
                 for (int j = 0; j < mapSizeX; j++)
                 {
-                    m_Map[i, j] = 0;
+                    m_Map[i, j] = m_defaultTile;
                     m_LinkList[i, j] = new Point(-1, -1);
                 }
             }
@@ -578,8 +579,15 @@ namespace TD_Maptool
             foreach (XmlNode Node in m_NodeList)
             {
                 listBox_Tile.Items.Add(Node["name"].InnerText.ToString());
-                m_Image[i++] = Image.FromFile(Node["image"].InnerText.ToString());
+                m_Image[i] = Image.FromFile(Node["image"].InnerText.ToString());
+
+                if (Node["default_tile"] != null)
+                    m_defaultTile = i;
+
+                ++i;
             }
+
+            panel1.Invalidate();
         }
     }
 }

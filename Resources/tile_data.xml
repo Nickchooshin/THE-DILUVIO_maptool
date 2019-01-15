@@ -4,6 +4,7 @@
     <name>Blank</name>
     <number>0</number>
     <image>Resources/Tile/Blank.png</image>
+    <default_tile>true</default_tile>
   </data>
 
   <data>
