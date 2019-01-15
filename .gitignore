@@ -22,4 +22,5 @@
 
 #git ignore
 /TD_Maptool/bin
+/TD_Maptool/obj
 
