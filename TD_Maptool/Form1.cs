@@ -15,11 +15,11 @@ namespace TD_Maptool
     {
         private int tileSizeXY = 32;
         private int mapSizeX = 0, mapSizeY = 0;
-        private XmlNodeList m_NodeList;
         private int[,] m_Map;
-        private Image[] m_Image;
+        private Image m_Image;
+        private TileInfo[] m_tileInfo;
         private int prevSelectedIndex = -1;
-        private int m_nNumLinkList=0;
+        private int m_nNumLinkList = 0;
         private Point[,] m_LinkList;
         private Point selectPoint = new Point(0, 0);
         private bool m_bDrag = false;
@@ -217,7 +217,7 @@ namespace TD_Maptool
             {
                 for (int j = 0; j < mapSizeX; j++)
                 {
-                    writer.Write(m_Map[i, j] + " ");
+                    writer.Write(m_tileInfo[m_Map[i, j]].num + " ");
                 }
 
                 writer.WriteLine();
@@ -289,8 +289,8 @@ namespace TD_Maptool
                         point.X += j;
                         point.Y += i;
                     }
-
-                    graphics.DrawImage(m_Image[m_Map[i, j]], point);
+                    
+                    graphics.DrawImage(m_Image, new Rectangle(point.X, point.Y, tileSizeXY, tileSizeXY), m_tileInfo[m_Map[i, j]].rect, GraphicsUnit.Pixel);
 
                     if (m_bLinkUI && (m_LinkList[i, j].X != -1 && m_LinkList[i, j].Y != -1))
                     {
@@ -372,10 +372,8 @@ namespace TD_Maptool
             Point point = new Point();
             point.X = e.Bounds.X + e.Font.Height + tileSizeXY;
             point.Y = e.Bounds.Y + (listBox_Tile.ItemHeight / 2) - (e.Font.Height / 2);
-
-            XmlNode Node = m_NodeList[e.Index];
-            Image img = Image.FromFile(Node["image"].InnerText.ToString());
-            e.Graphics.DrawImage(img, 0, e.Bounds.Y);
+            
+            e.Graphics.DrawImage(m_Image, new Rectangle(0, e.Bounds.Y, tileSizeXY, tileSizeXY), m_tileInfo[e.Index].rect, GraphicsUnit.Pixel);
             e.Graphics.DrawString(listBox_Tile.Items[e.Index].ToString(), e.Font, brush, point, StringFormat.GenericDefault);
             e.DrawFocusRectangle();
         }
@@ -548,8 +546,8 @@ namespace TD_Maptool
         {
             if (prevSelectedIndex == -1)
                 return;
-
-            m_Map[y, x] = prevSelectedIndex;
+            
+            m_Map[y, x] = m_tileInfo[prevSelectedIndex].num;
 
             panel1.Invalidate();
         }
@@ -569,19 +567,31 @@ namespace TD_Maptool
         private void tileSetLoad(string filePath)
         {
             XmlDocument xmlFile = new XmlDocument();
-            xmlFile.Load(filePath);
-            m_NodeList = xmlFile.SelectNodes("tile/data");
+            XmlNodeList xmlNodeList = null;
 
-            m_Image = new Image[m_NodeList.Count];
+            xmlFile.Load(filePath);
+            xmlNodeList = xmlFile.SelectNodes("tile/data");
+            
+            XmlNode nodeSetting = xmlFile.SelectSingleNode("tile/setting");
+            m_Image = Image.FromFile(nodeSetting["image"].InnerText.ToString());
+
+            m_tileInfo = new TileInfo[xmlNodeList.Count];
+
             listBox_Tile.Items.Clear();
 
             int i = 0;
-            foreach (XmlNode Node in m_NodeList)
+            foreach (XmlNode node in xmlNodeList)
             {
-                listBox_Tile.Items.Add(Node["name"].InnerText.ToString());
-                m_Image[i] = Image.FromFile(Node["image"].InnerText.ToString());
+                m_tileInfo[i] = new TileInfo();
 
-                if (Node["default_tile"] != null)
+                listBox_Tile.Items.Add(node["name"].InnerText.ToString());
+                m_tileInfo[i].num = int.Parse(node["number"].InnerText.ToString());
+                m_tileInfo[i].rect.X = int.Parse(node["image_rect"]["x"].InnerText.ToString());
+                m_tileInfo[i].rect.Y = int.Parse(node["image_rect"]["y"].InnerText.ToString());
+                m_tileInfo[i].rect.Width = int.Parse(node["image_rect"]["width"].InnerText.ToString());
+                m_tileInfo[i].rect.Height = int.Parse(node["image_rect"]["height"].InnerText.ToString());
+
+                if (node["default_tile"] != null)
                     m_defaultTile = i;
 
                 ++i;
@@ -589,5 +599,11 @@ namespace TD_Maptool
 
             panel1.Invalidate();
         }
+    }
+    
+    public class TileInfo
+    {
+        public Rectangle rect = new Rectangle(0, 0, 0, 0);
+        public int num = 0;
     }
 }

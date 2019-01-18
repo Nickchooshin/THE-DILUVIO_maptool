@@ -1,82 +1,112 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <tile>
+  <setting>
+    <image>Resources/tile.png</image>
+  </setting>
+
   <data>
     <name>Blank</name>
     <number>0</number>
-    <image>Resources/Tile/Blank.png</image>
+    <image_rect>
+      <x>0</x><y>0</y><width>32</width><height>32</height>
+    </image_rect>
     <default_tile>true</default_tile>
   </data>
 
   <data>
     <name>Main_character_right</name>
     <number>1</number>
-    <image>Resources/Tile/Main_character_right.png</image>
+    <image_rect>
+      <x>32</x><y>0</y><width>32</width><height>32</height>
+    </image_rect>
   </data>
 
   <data>
     <name>Ground_stone</name>
     <number>2</number>
-    <image>Resources/Tile/Ground_stone.png</image>
+    <image_rect>
+      <x>64</x><y>0</y><width>32</width><height>32</height>
+    </image_rect>
   </data>
 
   <data>
     <name>Ground_earth</name>
     <number>3</number>
-    <image>Resources/Tile/Ground_earth.png</image>
+    <image_rect>
+      <x>96</x><y>0</y><width>32</width><height>32</height>
+    </image_rect>
   </data>
 
   <data>
     <name>Ground_earth_up</name>
     <number>4</number>
-    <image>Resources/Tile/Ground_earth_up.png</image>
+    <image_rect>
+      <x>0</x><y>32</y><width>32</width><height>32</height>
+    </image_rect>
   </data>
 
   <data>
     <name>Ground_creeper</name>
     <number>5</number>
-    <image>Resources/Tile/Ground_creeper.png</image>
+    <image_rect>
+      <x>32</x><y>32</y><width>32</width><height>32</height>
+    </image_rect>
   </data>
 
   <data>
     <name>Ground_wather</name>
     <number>6</number>
-    <image>Resources/Tile/Ground_wather.png</image>
+    <image_rect>
+      <x>64</x><y>32</y><width>32</width><height>32</height>
+    </image_rect>
   </data>
 
   <data>
     <name>Ground_wather_up</name>
     <number>7</number>
-    <image>Resources/Tile/Ground_wather_up.png</image>
+    <image_rect>
+      <x>96</x><y>32</y><width>32</width><height>32</height>
+    </image_rect>
   </data>
 
   <data>
     <name>Jail_trap</name>
     <number>8</number>
-    <image>Resources/Tile/Jail_trap.png</image>
+    <image_rect>
+      <x>0</x><y>64</y><width>32</width><height>32</height>
+    </image_rect>
   </data>
 
   <data>
     <name>Jail_button</name>
     <number>9</number>
-    <image>Resources/Tile/Jail_button.png</image>
+    <image_rect>
+      <x>32</x><y>64</y><width>32</width><height>32</height>
+    </image_rect>
   </data>
 
   <data>
     <name>Glass</name>
     <number>10</number>
-    <image>Resources/Tile/Glass.png</image>
+    <image_rect>
+      <x>64</x><y>64</y><width>32</width><height>32</height>
+    </image_rect>
   </data>
 
   <data>
     <name>Arrival</name>
     <number>11</number>
-    <image>Resources/Tile/Arrival.png</image>
+    <image_rect>
+      <x>96</x><y>64</y><width>32</width><height>32</height>
+    </image_rect>
   </data>
 
   <data>
     <name>Montrilo_door</name>
     <number>12</number>
-    <image>Resources/Tile/Montrilo_door.png</image>
+    <image_rect>
+      <x>0</x><y>96</y><width>32</width><height>32</height>
+    </image_rect>
   </data>
 
 </tile>

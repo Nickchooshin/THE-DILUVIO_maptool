@@ -1,70 +1,176 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <tile>
+  <setting>
+    <image>Resources/itaf.png</image>
+  </setting>
+
   <data>
     <name>lt</name>
     <number>0</number>
-    <image>Resources/Itaf/0.png</image>
+    <image_rect>
+      <x>0</x><y>0</y><width>32</width><height>32</height>
+    </image_rect>
+    <default_tile>true</default_tile>
   </data>
 
   <data>
     <name>u</name>
     <number>1</number>
-    <image>Resources/Itaf/1.png</image>
+    <image_rect>
+      <x>32</x><y>0</y><width>32</width><height>32</height>
+    </image_rect>
   </data>
 
   <data>
     <name>rt</name>
     <number>2</number>
-    <image>Resources/Itaf/2.png</image>
+    <image_rect>
+      <x>64</x><y>0</y><width>32</width><height>32</height>
+    </image_rect>
   </data>
 
   <data>
-    <name>?</name>
+    <name>box</name>
     <number>3</number>
-    <image>Resources/Itaf/3.png</image>
+    <image_rect>
+      <x>96</x><y>0</y><width>32</width><height>32</height>
+    </image_rect>
+  </data>
+
+  <data>
+    <name>ladder</name>
+    <number>4</number>
+    <image_rect>
+      <x>128</x><y>0</y><width>32</width><height>32</height>
+    </image_rect>
   </data>
 
   <data>
     <name>l</name>
-    <number>4</number>
-    <image>Resources/Itaf/4.png</image>
+    <number>5</number>
+    <image_rect>
+      <x>0</x><y>32</y><width>32</width><height>32</height>
+    </image_rect>
   </data>
 
   <data>
-    <name>Blank</name>
-    <number>5</number>
-    <image>Resources/Itaf/5.png</image>
-    <default_tile>true</default_tile>
+    <name>blank</name>
+    <number>6</number>
+    <image_rect>
+      <x>32</x><y>32</y><width>32</width><height>32</height>
+    </image_rect>
   </data>
 
   <data>
     <name>r</name>
-    <number>6</number>
-    <image>Resources/Itaf/6.png</image>
+    <number>7</number>
+    <image_rect>
+      <x>64</x><y>32</y><width>32</width><height>32</height>
+    </image_rect>
   </data>
 
   <data>
-    <name>?</name>
-    <number>7</number>
-    <image>Resources/Itaf/7.png</image>
+    <name>lion</name>
+    <number>8</number>
+    <image_rect>
+      <x>96</x><y>32</y><width>32</width><height>32</height>
+    </image_rect>
+  </data>
+
+  <data>
+    <name>bicycle</name>
+    <number>9</number>
+    <image_rect>
+      <x>128</x><y>32</y><width>32</width><height>32</height>
+    </image_rect>
   </data>
 
   <data>
     <name>ld</name>
-    <number>8</number>
-    <image>Resources/Itaf/8.png</image>
+    <number>10</number>
+    <image_rect>
+      <x>0</x><y>64</y><width>32</width><height>32</height>
+    </image_rect>
   </data>
 
   <data>
     <name>d</name>
-    <number>9</number>
-    <image>Resources/Itaf/9.png</image>
+    <number>11</number>
+    <image_rect>
+      <x>32</x><y>64</y><width>32</width><height>32</height>
+    </image_rect>
   </data>
 
   <data>
     <name>rd</name>
-    <number>10</number>
-    <image>Resources/Itaf/10.png</image>
+    <number>12</number>
+    <image_rect>
+      <x>64</x><y>64</y><width>32</width><height>32</height>
+    </image_rect>
+  </data>
+
+  <data>
+    <name>crash</name>
+    <number>13</number>
+    <image_rect>
+      <x>96</x><y>64</y><width>32</width><height>32</height>
+    </image_rect>
+  </data>
+
+  <data>
+    <name>cover</name>
+    <number>14</number>
+    <image_rect>
+      <x>128</x><y>64</y><width>32</width><height>32</height>
+    </image_rect>
+  </data>
+
+  <data>
+    <name>baby</name>
+    <number>15</number>
+    <image_rect>
+      <x>0</x><y>96</y><width>32</width><height>32</height>
+    </image_rect>
+  </data>
+
+  <data>
+    <name>trap</name>
+    <number>16</number>
+    <image_rect>
+      <x>32</x><y>96</y><width>32</width><height>32</height>
+    </image_rect>
+  </data>
+
+  <data>
+    <name>rope</name>
+    <number>17</number>
+    <image_rect>
+      <x>64</x><y>96</y><width>32</width><height>32</height>
+    </image_rect>
+  </data>
+
+  <data>
+    <name>rope_tile</name>
+    <number>18</number>
+    <image_rect>
+      <x>96</x><y>96</y><width>32</width><height>32</height>
+    </image_rect>
+  </data>
+
+  <data>
+    <name>trampoline</name>
+    <number>19</number>
+    <image_rect>
+      <x>128</x><y>96</y><width>32</width><height>32</height>
+    </image_rect>
+  </data>
+
+  <data>
+    <name>sinkhole</name>
+    <number>20</number>
+    <image_rect>
+      <x>0</x><y>128</y><width>32</width><height>32</height>
+    </image_rect>
   </data>
 
 </tile>
